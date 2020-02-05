@@ -1,14 +1,46 @@
+  // setup a function to run whenever a key is pressed
+  let hero = new Hero()
+ let shapes=[]
+  ERASE()
+  hero.draw()
+  
+  window.addEventListener("keydown", event => {
+    console.log(event.code)
+    if (event.code === "KeyF"){
+      // Math.random() gives us a random number between 0 and 1
+      let colorIndex = Math.random()
+      let color = "red"
+      if (colorIndex < 0.3) {
+        color = "blue"
+      }
+      if (colorIndex > 0.6) {
+        color = "green"
+      }
+      CTX.fillStyle = color
 
-window.addEventListener("keydown", event => {
- let colorIndex = Math.random()
- let color = "purple"
- if (colorIndex < 0.5) {
- 	color = "orange"
- }
- ctx.fillStyle = color
+      // we can multiply Math.random() by X to get a number between 0 and X
+      let x = Math.random() * CANVAS.width
+      let y = Math.random() * CANVAS.height
+      let width = Math.random() * CANVAS.width
+      let height = Math.random() * CANVAS.height
 
- let x = Math.random()* canvas.width
- let y = Math.random()* canvas.height
-  new Shape (x,y,200,100).draw()
+      // create a new shape with the random attributes and draw it
+      let = new Shape(x, y, width, height)
+      shapes.push(s)
+    }
+   if (event.code ==="ArrowRight"){
+    hero.moveRight()
+  }
+   ERASE()
+   console.log(shapes)
+   shapes.forEach(s => s.draw())
+   hero.draw() 
 
 })
+
+
+
+
+
+
+
