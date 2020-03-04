@@ -3,11 +3,13 @@ let CANVAS = document.getElementById("display")
 CANVAS.width = document.body.clientWidth
 CANVAS.height = document.body.clientHeight
 
-// create 2D context object for drawing on the canvas
+// create 2D context object for drawing on the CANVAS
 let CTX = CANVAS.getContext("2d")
 
-function ERASE(){
 // draw a blue rectangle the size of the screen
-CTX.fillStyle = "blue"
-CTX.fillRect(0, 0, CANVAS.width, CANVAS.height)
+function ERASE() {
+  CTX.fillStyle = "green"
+  CTX.fillRect(0, 0, CANVAS.width, CANVAS.height)
 }
+
+let GRIDSIZE = CANVAS.height / 12

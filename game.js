@@ -1,46 +1,49 @@
-  // setup a function to run whenever a key is pressed
-  let hero = new Hero()
- let shapes=[]
-  ERASE()
-  hero.draw()
-  
-  window.addEventListener("keydown", event => {
-    console.log(event.code)
-    if (event.code === "KeyF"){
-      // Math.random() gives us a random number between 0 and 1
-      let colorIndex = Math.random()
-      let color = "red"
-      if (colorIndex < 0.3) {
-        color = "blue"
-      }
-      if (colorIndex > 0.6) {
-        color = "green"
-      }
-      CTX.fillStyle = color
+class Game {
+ constructor(){
 
-      // we can multiply Math.random() by X to get a number between 0 and X
-      let x = Math.random() * CANVAS.width
-      let y = Math.random() * CANVAS.height
-      let width = Math.random() * CANVAS.width
-      let height = Math.random() * CANVAS.height
-
-      // create a new shape with the random attributes and draw it
-      let = new Shape(x, y, width, height)
-      shapes.push(s)
-    }
-   if (event.code ==="ArrowRight"){
-    hero.moveRight()
-  }
-   ERASE()
-   console.log(shapes)
-   shapes.forEach(s => s.draw())
-   hero.draw() 
-
+// state
+this.hero = new Hero()
+this.keyPressed = {}
+this.platforms=[]
+// setup a function to run whenever a key is pressed
+window.addEventListener("keydown", event => {
+  this.keyPressed[event.code] = true
+})
+window.addEventListener("keyup", event => {
+  this.keyPressed[event.code] = false
 })
 
 
+this.platforms.push(new Platform(
+  GRIDSIZE,
+  GRIDSIZE*8,
+  GRIDSIZE*3,
+  GRIDSIZE
+  ))
 
+this.loop()
+}
 
+ loop() {
+  if (this.keyPressed["ArrowUp"]) {
+    this.hero.jump()
+  }
+  if (this.keyPressed["ArrowLeft"]) {
+    this.hero.moveLeft()
+  }
+  if (this.keyPressed["ArrowRight"]) {
+    this.hero.moveRight()
+  }
 
+  
+this.hero.step(this.platforms)
+  // draw everything
+  ERASE()
+  this.platforms.forEach (p=>p.draw())
+  this.hero.draw()
 
-
+  // run loop again!
+  setTimeout(()=>this.loop(), 1000 / 60)
+ }
+}
+ new Game()
